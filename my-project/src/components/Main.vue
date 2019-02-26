@@ -3,9 +3,16 @@
     <side-drawer
       @switch-body="switchBody"
     ></side-drawer>
-    <tool-bar
-            :body="body"
-    ></tool-bar>
+    <tool-bar></tool-bar>
+    <div
+            id="scrolling-techniques"
+            class="scroll-y"
+            style="margin-top: 56px; max-height: 600px;"
+    >
+      <v-container style="min-height: 500px">
+        <component :is="body" @switch-body="switchBody"></component>
+      </v-container>
+    </div>
   </div>
 </template>
 

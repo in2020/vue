@@ -11,7 +11,7 @@
         </v-list-tile-avatar>
 
         <v-list-tile-content>
-          <v-list-tile-title>John Leider</v-list-tile-title>
+          <v-list-tile-title>Snaps</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
@@ -22,7 +22,7 @@
       <v-list-tile
               v-for="item in items"
               :key="item.title"
-              @click="clickItem(item.component)"
+              @click="clickItem(item)"
       >
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
@@ -39,6 +39,7 @@
 <script>
   import Home from './Home'
   import About from './About'
+  import Snaps from './Snaps'
   import { EventBus } from '../assets/js/event-bus.js'
 
 export default {
@@ -47,15 +48,17 @@ export default {
     return {
       drawer: false,
       items: [
-        { title: 'Home', icon: 'dashboard', component: Home },
-        { title: 'About', icon: 'question_answer', component: About }
+        { title: 'Home', icon: 'home', component: Home },
+        { title: 'Snaps', icon: 'camera_alt', component: Snaps },
+        { title: 'About', icon: 'business', component: About }
       ]
     }
   },
   methods:{
-    clickItem: function(component){
+    clickItem: function(item){
       this.drawer = false;
-      this.$emit('switch-body', component);
+      EventBus.$emit('setToolBarTitle', item.title);
+      this.$emit('switch-body', item.component);
     },
 
     toggleDrawer: function(){
